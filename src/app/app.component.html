@@ -1,0 +1,92 @@
+<div class="container">  
+  <form [formGroup]="UsuarioForm" (ngSubmit)="this[EventValue]()">  
+      <h3>Cadastro de Usuario</h3>  
+      <div class="row">  
+      <table class="table">  
+      <tr>  
+        <td>Nome do Usuario</td>  
+        <td>  
+          <input type="hidden" formControlName="Id">  
+          <input type="text" formControlName="Nome">  
+          <div *ngIf="submitted && UsuarioForm.controls.Nome.errors" class="text-danger">  
+            <div *ngIf="UsuarioForm.controls.Nome.errors.required">O nome é obrigatório</div>  
+          </div>   
+        </td>  
+      </tr>  
+      <tr>  
+        <td>CPF</td>  
+        <td><input type="text" formControlName="CPF">  
+          <div *ngIf="submitted && UsuarioForm.controls.CPF.errors" class="text-danger">  
+            <div *ngIf="UsuarioForm.controls.CPF.errors.required">CPF é obrigatório</div>  
+          </div>   
+        </td>  
+      </tr>  
+      <tr>  
+        <td>email</td>  
+        <td>  
+          <input type="text" formControlName="email">  
+          <div *ngIf="submitted && UsuarioForm.controls.email.errors" class="text-danger">  
+            <div *ngIf="UsuarioForm.controls.email.errors.required">Informe o email</div>  
+          </div>  
+        </td>  
+      </tr>  
+      <tr>  
+        <td>telefone</td>  
+        <td>  
+          <input type="text" formControlName="telefone">  
+          <div *ngIf="submitted && UsuarioForm.controls.telefone.errors" class="text-danger">  
+            <div *ngIf="UsuarioForm.controls.telefone.errors.required">O Telefone é obrigatório</div>  
+          </div>  
+        </td>  
+      </tr> 
+      <tr>  
+        <td>Sexo</td>  
+        <td><input type="text" formControlName="Sexo">  
+          <div *ngIf="submitted && UsuarioForm.controls.Sexo.errors" class="text-danger">  
+            <div *ngIf="UsuarioForm.controls.Sexo.errors.required">Informe o Sexo de Nascimento</div>  
+          </div>   
+        </td>  
+      </tr>
+      <tr>  
+        <td>Data de Nascimento</td>  
+        <td><input type="text" formControlName="DataNascimento">  
+          <div *ngIf="submitted && UsuarioForm.controls.DataNascimento.errors" class="text-danger">  
+            <div *ngIf="UsuarioForm.controls.DataNascimento.errors.required">Informe a Data de Nascimento</div>  
+          </div>   
+        </td>  
+      </tr>     
+      <tr>  
+        <td colspan="2">  
+          <button type="submit" class="btn btn-primary">{{EventValue}}</button>  
+        </td>  
+      </tr>  
+    </table>  
+    </div>  
+   <div class="row">  
+    <table class="table table-striped">  
+      <tr>  
+        <td>ID</td>  
+        <td>Nome</td>  
+        <td>CPF</td>  
+        <td>Email</td>  
+        <td>telefone</td> 
+        <td>Sexo</td>  
+        <td>Data de nascimento</td>  
+        <td>Edita</td>  
+        <td>Deleta</td>  
+      </tr>  
+      <tr *ngFor="let d of data">  
+        <td>{{d.Id}}</td>  
+        <td>{{d.Nome}}</td>  
+        <td>{{d.CPF}}</td>  
+        <td>{{d.Email}}</td> 
+        <td>{{d.telefone}}</td>  
+        <td>{{d.Sexo}}</td> 
+        <td>{{d.DataNascimento}}</td>  
+        <td><a (click)="EditData(d)" class="btn btn-warning">Edita</a></td>  
+        <td><a (click)="deleteData(d.Id)" class="btn btn-danger">Deleta</a></td>    
+      </tr>  
+    </table>  
+  </div>  
+ </form>      
+</div> 
