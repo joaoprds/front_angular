@@ -8,74 +8,78 @@ import { FormGroup, FormControl,Validators } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'PagamentoCartao';
+  title = 'CadastrodeUsuario';
 
   constructor(private AppService: AppService) { }  
   data: any;  
-  CartaoForm: FormGroup;  
+  UsuarioForm: FormGroup;  
   submitted = false;   
-  EventValue: any = "Save";  
-  
+  EventValue: any = "Save";   
+
   ngOnInit(): void {  
-    this.getdata();  
-  
-    this.CartaoForm = new FormGroup({  
-      PagamentoId: new FormControl(null),  
-      NomeTitular: new FormControl("",[Validators.required]),        
-      NumeroCartao: new FormControl("",[Validators.required]),  
-      DataExpiracao:new FormControl("",[Validators.required]),  
-      CVV: new FormControl("",[Validators.required]),  
+    this.getdata(); 
+
+      this.UsuarioForm = new FormGroup({  
+      Id: new FormControl(null),  
+      Nome: new FormControl("",[Validators.required]),        
+      cpf: new FormControl("",[Validators.required]),  
+      email:new FormControl("",[Validators.required]),  
+      telefone: new FormControl("",[Validators.required]),
+      sexo: new FormControl("",[Validators.required]),
+      DataNascimento: new FormControl("",[Validators.required]),  
     })    
   }  
+
   getdata() {  
     this.AppService.getData().subscribe((data: any[]) => {  
       this.data = data;  
     })  
   }  
+
   deleteData(id) {  
     this.AppService.deleteData(id).subscribe((data: any[]) => {  
       this.data = data;  
       this.getdata();  
     })  
   }  
+
   Save() {   
-    this.submitted = true;  
-    
-     if (this.CartaoForm.invalid) {  
+    this.submitted = true;      
+    if (this.UsuarioForm.invalid) {  
             return;  
-     }  
-    this.AppService.postData(this.CartaoForm.value).subscribe((data: any[]) => {  
+    }  
+    this.AppService.postData(this.UsuarioForm.value).subscribe((data: any[]) => {  
       this.data = data;  
-      this.resetFrom();  
-  
+      this.resetFrom();   
     })  
   }  
   Update() {   
-    this.submitted = true;  
-    
-    if (this.CartaoForm.invalid) {  
-     return;  
+    this.submitted = true;      
+    if (this.UsuarioForm.invalid) {  
+    return;  
     }        
-    this.AppService.putData(this.CartaoForm.value.PagamentoId,this.CartaoForm.value).subscribe((data: any[]) => {  
+    this.AppService.putData(this.UsuarioForm.value.PagamentoId,
+            this.UsuarioForm.value).subscribe((data: any[]) => {  
       this.data = data;  
       this.resetFrom();  
     })  
   }  
-  
+
   EditData(Data) {  
-    this.CartaoForm.controls["PagamentoId"].setValue(Data.PagamentoId);  
-    this.CartaoForm.controls["NomeTitular"].setValue(Data.NomeTitular);      
-    this.CartaoForm.controls["NumeroCartao"].setValue(Data.NumeroCartao);  
-    this.CartaoForm.controls["DataExpiracao"].setValue(Data.DataExpiracao);  
-    this.CartaoForm.controls["CVV"].setValue(Data.CVV);  
-    this.EventValue = "Atualiza";  
-  }  
-  
+    this.UsuarioForm.controls["Id"].setValue(Data.Id);  
+    this.UsuarioForm.controls["Nome"].setValue(Data.Nome);      
+    this.UsuarioForm.controls["cpf"].setValue(Data.cpf);  
+    this.UsuarioForm.controls["email"].setValue(Data.email);  
+    this.UsuarioForm.controls["telefone"].setValue(Data.telefone);
+    this.UsuarioForm.controls["sexo"].setValue(Data.sexo);
+    this.UsuarioForm.controls["DataNascimento"].setValue(Data.DataNascimento);
+    this.EventValue = "Atualizar";  
+  }    
   resetFrom()  
   {     
     this.getdata();  
-    this.CartaoForm.reset();  
-    this.EventValue = "Save";  
+    this.UsuarioForm.reset();  
+    this.EventValue = "Salvar";  
     this.submitted = false;   
-  } 
-}
+  }
+} 
